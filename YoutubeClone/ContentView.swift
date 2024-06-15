@@ -8,9 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var selection:Tab = .home
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ZStack(alignment:.bottom) {
+            TabView(selection:$selection) {
+                HomeView()
+                    .tag(Tab.home)
+                ShortsView()
+                    .tag(Tab.shorts)
+                ProfileView()
+                    .tag(Tab.account)
+            }
+            TabBarView(selection:$selection)
+        }
+    }
+    
+    init() {
+        UITabBar.appearance().isHidden = true
     }
 }
 
